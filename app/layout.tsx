@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
+import { SiteFooter } from "@/components/Footer";
+import { Navigation } from "@/components/Navigation";
 
 const folioFont = localFont({
   src: [
     {
-      path: '../public/fonts/folio-std-webfont/Folio-Std-Medium.woff',
-      weight: '400',
-      style: 'normal',
+      path: "../public/fonts/folio-std-webfont/Folio-Std-Medium.woff",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: '../public/fonts/folio-std-webfont/Folio-Std-Bold.woff',
-      weight: '600',
-      style: 'bold',
+      path: "../public/fonts/folio-std-webfont/Folio-Std-Bold.woff",
+      weight: "600",
+      style: "bold",
     },
     {
-      path: '../public/fonts/folio-std-webfont/Folio-Std-Light.woff',
-      weight: '300',
-      style: 'light',
+      path: "../public/fonts/folio-std-webfont/Folio-Std-Light.woff",
+      weight: "300",
+      style: "light",
     },
   ],
-  variable: '--font-folio',
+  variable: "--font-folio",
 });
 
 const geistMono = Geist_Mono({
@@ -44,7 +46,11 @@ export default function RootLayout({
       <body
         className={`${folioFont.variable} ${geistMono.variable} antialiased`}
       >
+        <nav>
+          <Navigation />
+        </nav>
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
