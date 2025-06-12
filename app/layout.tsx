@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
+import localFont from 'next/font/local';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const folioFont = localFont({
+  src: [
+    {
+      path: '../public/fonts/folio-std-webfont/Folio-Std-Medium.woff',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/folio-std-webfont/Folio-Std-Bold.woff',
+      weight: '600',
+      style: 'bold',
+    },
+    {
+      path: '../public/fonts/folio-std-webfont/Folio-Std-Light.woff',
+      weight: '300',
+      style: 'light',
+    },
+  ],
+  variable: '--font-folio',
 });
 
 const geistMono = Geist_Mono({
@@ -25,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${folioFont.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
