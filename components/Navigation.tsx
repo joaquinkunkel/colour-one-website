@@ -21,20 +21,31 @@ const navItems = [
 ];
 
 export function Navigation() {
-  const pathname = usePathname()
-  const [isExpanded, setIsExpanded] = useState(false)
+  const pathname = usePathname();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const expandMenu = useCallback(() => {
-    setIsExpanded(true)
-  }, [])
+    setIsExpanded(true);
+  }, []);
 
   const collapseMenu = useCallback(() => {
-    setIsExpanded(false)
-  }, [])
+    setIsExpanded(false);
+  }, []);
 
-  const collapsedMenu = useMemo(() => (
-    <div onClick={expandMenu}>Expand</div>
-  ), [expandMenu])
+  const collapsedMenu = useMemo(
+    () => (
+      <NavigationMenu viewport={false}>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild className={navigationMenuTriggerStyle()} onClick={expandMenu}>
+              <Link href="#">Menu</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    ),
+    [expandMenu]
+  );
 
   const expandedMenu = useMemo(
     () =>
@@ -57,14 +68,16 @@ export function Navigation() {
       <NavigationMenuList>
         {isExpanded ? (
           <>
-          <NavigationMenuItem>
-            <NavigationMenuLink onClick={collapseMenu}>
-              Collapse
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          {expandedMenu}
-        </>
-          ) : collapsedMenu}
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()} onClick={collapseMenu}>
+                <Link href="#">Collapse</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            {expandedMenu}
+          </>
+        ) : (
+          collapsedMenu
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );
