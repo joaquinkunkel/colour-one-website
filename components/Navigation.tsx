@@ -244,6 +244,7 @@ const searchButtonVariants = {
 const mobileNavWrapperVariants = {
   expanded: {
     height: "100svh",
+    background: 'var(--color-background-60)',
     transition: {
       duration: 0.5,
       ease: "easeOut" as const,
@@ -284,7 +285,7 @@ export function Navigation() {
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
-                  className={navigationMenuTriggerStyle()}
+                  className={navigationMenuTriggerStyle}
                   onClick={expandMenu}
                 >
                   <Button variant="ghost">Menu</Button>
@@ -304,7 +305,7 @@ export function Navigation() {
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
-                  className={navigationMenuMutedTriggerStyle()}
+                  className={navigationMenuMutedTriggerStyle}
                   onClick={collapseMenu}
                 >
                   <Button variant="ghost">Collapse</Button>
@@ -328,7 +329,7 @@ export function Navigation() {
                   <NavigationMenuItem>
                     <NavigationMenuLink
                       asChild
-                      className={navigationMenuTriggerStyle()}
+                      className={navigationMenuTriggerStyle}
                       active={pathname === navItem.href}
                     >
                       <Link href={navItem.href}>{navItem.label}</Link>
@@ -348,7 +349,7 @@ export function Navigation() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
-                className={navigationMenuTriggerStyle()}
+                className={navigationMenuTriggerStyle}
               >
                 <Link href="/">Colour One</Link>
               </NavigationMenuLink>
@@ -364,7 +365,7 @@ export function Navigation() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
-                className={navigationMenuTriggerStyle()}
+                className={navigationMenuTriggerStyle}
                 onClick={expandMenu}
               >
                 <Link href="#">Search</Link>
@@ -376,7 +377,7 @@ export function Navigation() {
 
       {/* Mobile nav menu */}
       <motion.div
-        className="sm:hidden container bg-background absolute top-0 z-1000 py-4 flex justify-between overflow-hidden h-[100svh]"
+        className="backdrop-blur-xl sm:hidden container bg-background absolute top-0 z-1000 py-4 flex justify-between overflow-hidden h-[100svh]"
         initial="collapsed"
         variants={mobileNavWrapperVariants}
         animate={isMenuExpanded ? "expanded" : "collapsed"}
@@ -391,7 +392,7 @@ export function Navigation() {
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
-                  className={navigationMenuTriggerStyle()}
+                  className={navigationMenuTriggerStyle}
                   onClick={expandMenu}
                 >
                   <Button variant="ghost">Menu</Button>
@@ -411,10 +412,10 @@ export function Navigation() {
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
-                  className={navigationMenuMutedTriggerStyle()}
+                  className={`${navigationMenuTriggerStyle} bg-none`}
                   onClick={collapseMenu}
                 >
-                  <Button variant="ghost">Collapse</Button>
+                  <Button variant="ghost" className="transition-all">Collapse</Button>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </motion.div>
@@ -436,7 +437,7 @@ export function Navigation() {
                   <NavigationMenuItem>
                     <NavigationMenuLink
                       asChild
-                      className={navigationMenuTriggerStyle()}
+                      className={`${navigationMenuTriggerStyle} bg-none`}
                       active={pathname === navItem.href}
                     >
                       <Link className="text-xl" href={navItem.href}>{navItem.label}</Link>
@@ -456,7 +457,7 @@ export function Navigation() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
-                className={navigationMenuTriggerStyle()}
+                className={navigationMenuTriggerStyle}
               >
                 <Link href="/">Colour One</Link>
               </NavigationMenuLink>
@@ -472,7 +473,7 @@ export function Navigation() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
-                className={navigationMenuTriggerStyle()}
+                className={navigationMenuTriggerStyle}
                 onClick={expandMenu}
               >
                 <Link href="#">Search</Link>
