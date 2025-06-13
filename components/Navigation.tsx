@@ -246,7 +246,7 @@ const mobileNavWrapperVariants = {
     height: "100vh",
     background: 'var(--color-background-60)',
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: "easeOut" as const,
     },
   },
