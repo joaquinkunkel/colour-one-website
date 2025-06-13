@@ -12,7 +12,7 @@ export function SiteFooter() {
   }, [])
   return (
     <footer className="bg-background/50 backdrop-blur-md">
-      <div className="container mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
         {/* Contact*/}
         <div>
           <p className="text-xs font-medium mb-4 uppercase text-foreground">Contact</p>

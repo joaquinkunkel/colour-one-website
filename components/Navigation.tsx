@@ -143,7 +143,7 @@ export function Navigation() {
   }, []);
 
   return (
-    <NavigationMenu viewport={false} className="w-full p-4 max-w-full flex justify-between overflow-x-hidden">
+    <NavigationMenu viewport={false} className="container p-4 max-w-full flex justify-between overflow-x-hidden">
       <NavigationMenuList>
         <motion.div
           variants={menuButtonVariants}

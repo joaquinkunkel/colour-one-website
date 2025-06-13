@@ -38,7 +38,7 @@ export function HomeCarousel() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-[900px] mx-auto"
+      className="w-full px-3 mx-auto"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
