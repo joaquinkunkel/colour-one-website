@@ -1,77 +1,8 @@
 import { HomeCarousel } from "@/components/HomeCarousel";
 import Link from "next/link";
 import Image from "next/image";
+import { featuredWorks, teamMembers } from './data/homepage.js'
 
-const teamMembers = [
-  {
-    name: 'CJ Jones',
-    role: 'Partner',
-  },
-    {
-    name: 'Thomas Trautmann',
-    role: 'PA to Partner',
-  },
-    {
-    name: 'Annabelle Jones',
-    role: 'General Manager',
-  },
-    {
-    name: 'Amelia Lowe',
-    role: 'Head of Research & Collection Development',
-  },
-    {
-    name: 'Lydia Rivera',
-    role: 'Senior Registrar',
-  },
-    {
-    name: 'Hector Rosenfalck',
-    role: 'Art Technician',
-  },
-    {
-    name: 'Philip Rebeiz',
-    role: 'Partner',
-  },
-    {
-    name: 'Nathalie Roberts',
-    role: 'PA to Partner',
-  },
-    {
-    name: 'Maxi Siegrist',
-    role: 'Associate Director',
-  },
-    {
-    name: 'Valentin Benoit',
-    role: 'Sales Associate',
-  },
-    {
-    name: 'Geri McMeekin',
-    role: 'Director of Logistics',
-  },
-    {
-    name: 'Cristian Rizea',
-    role: 'Head Technician',
-  },
-    {
-    name: 'Eleanor Dilloway',
-    role: 'Director',
-  },
-    {
-    name: 'Britt Cole',
-    role: 'Chief Operating Officer',
-  },
-    {
-    name: 'Katie Delane',
-    role: 'Executive Assistant',
-  },
-    {
-    name: 'Eliot Engelmaier',
-    role: 'Sales and Design Assistant',
-  },
-    {
-    name: 'Aaliyah Kaur',
-    role: 'Registrar',
-  },
-]
 
 export default function Home() {
   return (
@@ -81,33 +12,35 @@ export default function Home() {
           <HomeCarousel />
         </div>
         <div className="container mx-auto px-[24px]">
-          <h3 className="font-light text-center text-[40px] leading-tight">
+          <h3 className="font-light text-center text-[40px] leading-tight max-w-[1000px] mx-auto">
             Colour One is an independent art advisory with more than a decade of
             experience advising our clients across modern and contemporary art.
           </h3>
         </div>
-        <div className="container max-w-[800px] mx-auto px-[24px] text-center flex flex-col gap-2">
-          <Image
-            className="mb-8"
-            src="/images/image-3.png"
-            alt="Richard Prince: Same Man"
-            width={2652}
-            height={1768}
-          />
-          <h2 className="font-light text-[40px] leading-tight">
-            Richard Prince: <span className="whitespace-nowrap">Same Man</span>
-          </h2>
-          <p className="font-light">
-            Louisiana Museum, Copenhagen
-            <br />
-            17th November 2022 - 10th April 2023
-          </p>
-          <Link href="special-projects" className="font-light text-muted-foreground hover:text-foreground">
-            Discover
-          </Link>
-        </div>
-        <div className="container mx-auto px-[24px] grid grid-cols-1 md:grid-cols-5 gap-20 md:items-start xl:items-center">
-          <div className="col-span-3 lg:col-span-2 sticky top-20">
+        {featuredWorks.map((featuredWork, index) => (
+          <div key={index} className="container max-w-[800px] mx-auto px-[24px] text-center flex flex-col gap-2">
+            <Image
+              className="mt-8 mb-12"
+              src={featuredWork.imageSrc}
+              alt={featuredWork.imageAlt}
+              width={featuredWork.imageWidth}
+              height={featuredWork.imageHeight}
+            />
+            {featuredWork.eyebrowText && <p className="font-light italic mb-2">{featuredWork.eyebrowText}</p>}
+            <h2 className="font-light text-[40px] leading-tight">
+              {featuredWork.title}
+            </h2>
+            <p className="font-light text-xl">{featuredWork.caption}</p>
+            <Link
+              href={featuredWork.href}
+              className="font-light mt-2 text-muted-foreground hover:text-foreground"
+            >
+              Discover
+            </Link>
+          </div>
+        ))}
+        <div className="container py-8 mx-auto px-[24px] grid grid-cols-1 md:grid-cols-5 gap-20 md:items-start xl:items-center">
+          <div className="col-span-3 lg:col-span-2 md:sticky top-20">
             <Image
               className="w-full"
               src="/images/image-5.png"
@@ -117,22 +50,14 @@ export default function Home() {
             />
           </div>
           <div className="col-span-2 lg:col-span-3">
-            <p className="text-xl font-light mb-12">
-              Team
-            </p>
+            <p className="text-xl font-light mb-12">Team</p>
             <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 grid-flow-row lg:max-h-240 gap-4">
-                {
-                  teamMembers.map((member, index) => (
-                    <div key={index}>
-                      <p className="text-xl font-light">
-                        {member.name}
-                      </p>
-                      <p className="text-s font-light">
-                        {member.role}
-                      </p>
-                    </div>
-                  ))
-                }
+              {teamMembers.map((member, index) => (
+                <div key={index}>
+                  <p className="text-xl font-light">{member.name}</p>
+                  <p className="text-s font-light">{member.role}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
