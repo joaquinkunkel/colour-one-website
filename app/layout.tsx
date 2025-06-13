@@ -53,7 +53,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <nav className="bg-background z-100 container mx-auto sticky top-0">
+          <nav className="bg-background z-100 mx-auto sticky top-0">
             <Navigation />
           </nav>
           {children}
