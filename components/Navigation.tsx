@@ -243,7 +243,7 @@ const searchButtonVariants = {
 
 const mobileNavWrapperVariants = {
   expanded: {
-    height: "100svh",
+    height: "100vh",
     background: 'var(--color-background-60)',
     transition: {
       duration: 0.5,
@@ -377,7 +377,7 @@ export function Navigation() {
 
       {/* Mobile nav menu */}
       <motion.div
-        className="backdrop-blur-xl sm:hidden container bg-background absolute top-0 z-1000 py-4 flex justify-between overflow-hidden h-[100svh]"
+        className="backdrop-blur-xl sm:hidden container bg-background absolute top-0 z-1000 py-4 flex justify-between overflow-hidden h-[100vh]"
         initial="collapsed"
         variants={mobileNavWrapperVariants}
         animate={isMenuExpanded ? "expanded" : "collapsed"}
