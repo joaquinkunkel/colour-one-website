@@ -18,7 +18,7 @@ export default function Home() {
           whileInView={{
             opacity: 1,
             y: 0,
-            transition: { duration: 0.5, ease: "easeOut", delay: 0.15 },
+            transition: { duration: 0.5, ease: "easeInOut", delay: 0.15 },
           }}
           viewport={{ once: true }}
           className="container w-full mx-auto overflow-x-hidden"
@@ -68,7 +68,7 @@ export default function Home() {
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
+                    transition: { duration: 0.5, ease: "easeInOut" },
                   },
                 }}
               >
@@ -92,7 +92,7 @@ export default function Home() {
                     visible: {
                       opacity: 1,
                       y: 0,
-                      transition: { duration: 0.5, ease: "easeOut" },
+                      transition: { duration: 0.5, ease: "easeInOut" },
                     },
                   }}
                 >
@@ -120,12 +120,12 @@ export default function Home() {
                 variants={{
                   hidden: {
                     opacity: 0,
-                    y: 60,
+                    y: 20,
                   },
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
+                    transition: { duration: 0.5, ease: "easeInOut" },
                   },
                 }}
               >
@@ -135,12 +135,12 @@ export default function Home() {
                 variants={{
                   hidden: {
                     opacity: 0,
-                    y: 60,
+                    y: 20,
                   },
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
+                    transition: { duration: 0.5, ease: "easeInOut" },
                   },
                 }}
               >
@@ -191,7 +191,7 @@ export default function Home() {
                 visible: {
                   y: 0,
                   opacity: 1,
-                  transition: { duration: 0.3, ease: "easeOut" },
+                  transition: { duration: 0.3, ease: "easeInOut" },
                 },
               }}
             >
@@ -206,7 +206,7 @@ export default function Home() {
                     visible: {
                       y: 0,
                       opacity: 1,
-                      transition: { duration: 0.3, ease: "easeOut" },
+                      transition: { duration: 0.3, ease: "easeInOut" },
                     },
                   }}
                 >

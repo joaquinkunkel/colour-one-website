@@ -13,6 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
+import { Button } from "./ui/button";
 
 const navItems = [
   { href: "/special-projects", label: "Special Projects" },
@@ -157,7 +158,7 @@ export function Navigation() {
                 className={navigationMenuTriggerStyle()}
                 onClick={expandMenu}
               >
-                <Link href="#">Menu</Link>
+                <Button variant="ghost">Menu</Button>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </AnimatePresence>
@@ -189,7 +190,7 @@ export function Navigation() {
                     className={navigationMenuMutedTriggerStyle()}
                     onClick={collapseMenu}
                   >
-                    <Link href="#">Collapse</Link>
+                    <Button variant="ghost">Collapse</Button>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </motion.div>
