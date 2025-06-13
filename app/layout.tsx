@@ -46,7 +46,7 @@ export default function RootLayout({
       <body
         className={`${folioFont.variable} ${geistMono.variable} antialiased`}
       >
-        <nav>
+        <nav className="bg-background z-100 container mx-auto sticky top-0">
           <Navigation />
         </nav>
         {children}

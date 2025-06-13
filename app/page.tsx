@@ -107,7 +107,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="container mx-auto px-[24px] grid grid-cols-1 md:grid-cols-5 gap-20 md:items-start xl:items-center">
-          <div className="col-span-3 lg:col-span-2">
+          <div className="col-span-3 lg:col-span-2 sticky top-20">
             <Image
               className="w-full"
               src="/images/image-5.png"
