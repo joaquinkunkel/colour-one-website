@@ -25,7 +25,7 @@ export default function Home() {
             },
           },
         }}
-        className="container mx-auto px-6 py-10 md:py-0 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 row-start-2 items-center"
+        className="container mx-auto px-6 py-10 md:py-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 row-start-2 items-center"
       >
         <div className="flex flex-col gap-6 leading-[2] sticky bottom-[20vh] text-md lg:text-xl">
           <motion.div
@@ -84,7 +84,6 @@ export default function Home() {
             src="/images/services-image.png"
             width={1760}
             height={2354}
-            className="h-full w-auto"
             alt={"Services photo"}
           />
         </motion.div>

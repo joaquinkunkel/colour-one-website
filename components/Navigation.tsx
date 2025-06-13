@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 
 const navItems = [
+  { href: "/", label: "Home" },
   { href: "/special-projects", label: "Special Projects" },
   { href: "/services", label: "Services" },
   { href: "/articles", label: "Articles" },
