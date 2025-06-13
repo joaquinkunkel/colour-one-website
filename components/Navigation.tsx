@@ -22,13 +22,13 @@ const navItems = [
   { href: "/contact", label: "Contact" },
 ];
 
-// Animation variants - Fixed to prevent jumping
 const menuButtonVariants = {
   expanded: {
     opacity: 0,
     x: -10,
     pointerEvents: "none",
     scale: 0.8,
+    width: 100,
     zIndex: 100,
     display: "none",
     transition: {
@@ -41,6 +41,7 @@ const menuButtonVariants = {
     opacity: 1,
     pointerEvents: "auto",
     scale: 1,
+    width: 100,
     zIndex: 0,
     transition: {
       duration: 0,
@@ -49,61 +50,15 @@ const menuButtonVariants = {
   },
 };
 
-const containerVariants = {
-  collapsed: {
-    width: 0,
-    transition: {
-      duration: 0,
-      ease: "easeInOut" as const,
-      staggerChildren: 0.5,
-      staggerDirection: -1 as const,
-    },
-  },
-  expanded: {
-    width: 'auto',
-    transition: {
-      duration: 0,
-      ease: "easeInOut" as const,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const listVariants = {
-  collapsed: {
-    gap: 0,
-    transition: {
-      duration: 0,
-      ease: "easeInOut" as const,
-    },
-  },
-  expanded: {
-    gap: 8,
-    transition: {
-      duration: 0.3,
-      ease: "easeInOut" as const,
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  collapsed: {
-    opacity: 0,
-    x: -20,
-    pointerEvents: "none",
-    transition: {
-      duration: 0,
-      ease: "easeInOut" as const,
-    },
-  },
-  expanded: {
-    opacity: 1,
+const expandedMenuVariants = {
+  hidden: { x: -20, opacity: 0 },
+  visible: {
     x: 0,
-    pointerEvents: "auto",
+    opacity: 1,
     transition: {
-      duration: 0.3,
-      ease: "easeOut" as const,
+      duration: 0.2,
+      ease: "easeInOut" as const,
+      staggerChildren: 0.05,
     },
   },
 };
@@ -112,6 +67,8 @@ const collapseButtonVariants = {
   collapsed: {
     opacity: 0,
     x: -20,
+    width: 100,
+    display: "none",
     pointerEvents: "none",
     transition: {
       duration: 0,
@@ -121,9 +78,49 @@ const collapseButtonVariants = {
   expanded: {
     opacity: 1,
     x: 0,
+    width: 100,
+    display: "block",
     pointerEvents: "auto",
     transition: {
+      duration: 0,
+      ease: "easeOut" as const,
+    },
+  },
+};
+
+const colourOneButtonVariants = {
+  hidden: {
+    opacity: 0,
+    x: 20,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut" as const,
+    },
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut" as const,
+    },
+  },
+};
+
+const searchButtonVariants = {
+  hidden: {
+    opacity: 0,
+    x: 20,
+    transition: {
       duration: 0.3,
+      ease: "easeOut" as const,
+    },
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.2,
       ease: "easeOut" as const,
     },
   },
@@ -131,25 +128,28 @@ const collapseButtonVariants = {
 
 export function Navigation() {
   const pathname = usePathname();
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMenuExpanded, setIsMenuExpanded] = useState(false);
 
   const expandMenu = useCallback(() => {
     console.log("@@expand");
-    setIsExpanded(true);
+    setIsMenuExpanded(true);
   }, []);
 
   const collapseMenu = useCallback(() => {
     console.log("@@collapse");
-    setIsExpanded(false);
+    setIsMenuExpanded(false);
   }, []);
 
   return (
-    <NavigationMenu viewport={false} className="container py-4 max-w-full flex justify-between overflow-x-hidden">
+    <NavigationMenu
+      viewport={false}
+      className="container py-4 max-w-full flex justify-between overflow-x-hidden"
+    >
       <NavigationMenuList>
         <motion.div
           variants={menuButtonVariants}
           initial="collapsed"
-          animate={isExpanded ? "expanded" : "collapsed"}
+          animate={isMenuExpanded ? "expanded" : "collapsed"}
         >
           <AnimatePresence mode="wait">
             <NavigationMenuItem>
@@ -163,100 +163,104 @@ export function Navigation() {
             </NavigationMenuItem>
           </AnimatePresence>
         </motion.div>
-        <motion.div
-          variants={containerVariants}
-          animate={isExpanded ? "expanded" : "collapsed"}
-          style={{width: 0}}
-        >
+        <div className="w-0 flex items-center">
+          {/* Collapse button */}
           <motion.div
-            variants={listVariants}
-            animate={isExpanded ? "expanded" : "collapsed"}
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
+            key="collapse-button"
+            variants={collapseButtonVariants}
+            initial="collapsed"
+            animate={isMenuExpanded ? "expanded" : "collapsed"}
+            exit="collapsed"
           >
-            <AnimatePresence mode="wait">
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuMutedTriggerStyle()}
+                onClick={collapseMenu}
+              >
+                <Button variant="ghost">Collapse</Button>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </motion.div>
+
+          {/* Parent of expanded menu items */}
+          <motion.div
+            className="flex"
+            initial="hidden"
+            animate={isMenuExpanded ? "visible" : "hidden"}
+            variants={expandedMenuVariants}
+          >
+            {navItems.map((navItem, index) => (
               <motion.div
-                key="collapse-button"
-                variants={collapseButtonVariants}
-                initial="collapsed"
-                animate={isExpanded ? "expanded" : "collapsed"}
-                exit="collapsed"
+                key={`${navItem.href}-${index}`}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    x: -20,
+                    pointerEvents: "none",
+                    transition: {
+                      duration: 0.3,
+                      ease: "easeInOut",
+                    },
+                  },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    pointerEvents: "auto",
+                    transition: {
+                      duration: 0.3,
+                      ease: "easeOut",
+                    },
+                  },
+                }}
+                custom={index}
               >
                 <NavigationMenuItem>
                   <NavigationMenuLink
                     asChild
-                    className={navigationMenuMutedTriggerStyle()}
-                    onClick={collapseMenu}
+                    className={navigationMenuTriggerStyle()}
+                    active={pathname === navItem.href}
                   >
-                    <Button variant="ghost">Collapse</Button>
+                    <Link href={navItem.href}>{navItem.label}</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </motion.div>
-            </AnimatePresence>
-
-            <AnimatePresence>
-              {navItems.map((navItem, index) => (
-                <motion.div
-                  key={`${navItem.href}-${index}`}
-                  variants={itemVariants}
-                  initial="collapsed"
-                  animate={isExpanded ? "expanded" : "collapsed"}
-                  exit="collapsed"
-                  custom={index}
-                >
-                  <NavigationMenuItem>
-                    <NavigationMenuLink
-                      asChild
-                      className={navigationMenuTriggerStyle()}
-                      active={pathname === navItem.href}
-                    >
-                      <Link href={navItem.href}>{navItem.label}</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+            ))}
           </motion.div>
+        </div>
+      </NavigationMenuList>
+      <NavigationMenuList>
+        <motion.div
+          variants={colourOneButtonVariants}
+          initial="visible"
+          animate={isMenuExpanded ? "hidden" : "visible"}
+        >
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+              onClick={expandMenu}
+            >
+              <Link href="/">Colour One</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
         </motion.div>
       </NavigationMenuList>
       <NavigationMenuList>
         <motion.div
-          variants={menuButtonVariants}
-          initial="collapsed"
-          animate={isExpanded ? "expanded" : "collapsed"}
+          variants={searchButtonVariants}
+          initial="visible"
+          animate={isMenuExpanded ? "hidden" : "visible"}
         >
-          <AnimatePresence mode="wait">
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                asChild
-                className={navigationMenuTriggerStyle()}
-                onClick={expandMenu}
-              >
-                <Link href="/">Colour One</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </AnimatePresence>
-        </motion.div>
-      </NavigationMenuList>
-      <NavigationMenuList>
-        <motion.div
-          variants={menuButtonVariants}
-          initial="collapsed"
-          animate={isExpanded ? "expanded" : "collapsed"}
-        >
-          <AnimatePresence mode="wait">
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                asChild
-                className={navigationMenuTriggerStyle()}
-                onClick={expandMenu}
-              >
-                <Link href="#">Search</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </AnimatePresence>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+              onClick={expandMenu}
+            >
+              <Link href="#">Search</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
         </motion.div>
       </NavigationMenuList>
     </NavigationMenu>
