@@ -9,10 +9,19 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <div className="font-[family-name:var(--font-folio)]">
-      <main className="flex flex-col gap-[64px] row-start-2 pb-[24] pt-[80] sm:pt-[0] items-center sm:items-start">
-        <div className="container w-full mx-auto overflow-x-hidden">
+      <main className="flex flex-col gap-[64px] row-start-2 items-center sm:items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, ease: "easeInOut", delay: 0.15 },
+          }}
+          viewport={{ once: true }}
+          className="container w-full mx-auto overflow-x-hidden"
+        >
           <HomeCarousel />
-        </div>
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{

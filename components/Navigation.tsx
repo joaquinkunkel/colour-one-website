@@ -331,6 +331,7 @@ export function Navigation() {
                       asChild
                       className={navigationMenuTriggerStyle}
                       active={pathname === navItem.href}
+                      onClick={collapseMenu}
                     >
                       <Link href={navItem.href}>{navItem.label}</Link>
                     </NavigationMenuLink>
@@ -439,6 +440,7 @@ export function Navigation() {
                       asChild
                       className={`${navigationMenuTriggerStyle} bg-none`}
                       active={pathname === navItem.href}
+                      onClick={collapseMenu}
                     >
                       <Link className="text-xl" href={navItem.href}>{navItem.label}</Link>
                     </NavigationMenuLink>

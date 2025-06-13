@@ -56,7 +56,9 @@ export default function RootLayout({
           <nav className="bg-background z-100 mx-auto sticky top-0">
             <Navigation />
           </nav>
-          {children}
+          <div className="pb-[24] pt-[80] sm:pt-[0]">
+            {children}
+          </div>
           <SiteFooter />
         </ThemeProvider>
       </body>
