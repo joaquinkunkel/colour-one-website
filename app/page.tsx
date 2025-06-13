@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <div className="font-[family-name:var(--font-folio)]">
-      <main className="flex flex-col gap-[64px] row-start-2 pb-[24] sm:pt-[24] items-center sm:items-start">
+      <main className="flex flex-col gap-[64px] row-start-2 pb-[24] pt-[80] sm:pt-[0] items-center sm:items-start">
         <div className="container w-full mx-auto overflow-x-hidden">
           <HomeCarousel />
         </div>
