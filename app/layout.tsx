@@ -4,6 +4,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { SiteFooter } from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
+import { ThemeProvider } from "next-themes";
 
 const folioFont = localFont({
   src: [
@@ -46,11 +47,18 @@ export default function RootLayout({
       <body
         className={`${folioFont.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="bg-background z-100 container mx-auto sticky top-0">
-          <Navigation />
-        </nav>
-        {children}
-        <SiteFooter />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <nav className="bg-background z-100 container mx-auto sticky top-0">
+            <Navigation />
+          </nav>
+          {children}
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );
