@@ -1,72 +1,68 @@
-import Link from 'next/link'
-import { Button } from "@/components/ui/button"
-import { 
-  LinkedInLogoIcon, 
-  InstagramLogoIcon, 
-  TwitterLogoIcon 
-} from "@radix-ui/react-icons"
+"use client"
+
+import { useCallback, useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "./ui/input";
 
 export function SiteFooter() {
+  const [emailText, setEmailText] = useState('')
+  const handleEmailTextChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailText(e.target.value)
+  }, [])
   return (
-    <footer className="border-t bg-background/50 backdrop-blur-md">
+    <footer className="bg-background/50 backdrop-blur-md">
       <div className="container mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
-        {/* Company Info */}
+        {/* Contact*/}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Colour One</h3>
-          <p className="text-muted-foreground">
-            Creative design studio specializing in brand transformation
-          </p>
-        </div>
-
-        {/* Quick Links */}
-        <div>
-          <h4 className="font-medium mb-4">Quick Links</h4>
+          <p className="text-xs font-medium mb-4 uppercase text-foreground">Contact</p>
           <nav className="space-y-2">
-            <Link 
-              href="/work" 
-              className="text-muted-foreground hover:text-foreground transition-colors"
+            <Link
+              href="/work"
+              className="text-foreground hover:text-muted-foreground transition-colors"
             >
-              Projects
+              info@colourone.com
             </Link>
-            <Link 
-              href="/about" 
-              className="block text-muted-foreground hover:text-foreground transition-colors"
+            <Link
+              href="/about"
+              className="block text-foreground hover:text-muted-foreground transition-colors"
             >
-              About Us
-            </Link>
-            <Link 
-              href="/contact" 
-              className="block text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Contact
+              +44 (0) 207 495 0700
             </Link>
           </nav>
         </div>
 
-        {/* Social & Contact */}
+        {/* Address */}
         <div>
-          <h4 className="font-medium mb-4">Connect</h4>
-          <div className="flex space-x-4 mb-4">
-            <Button variant="outline" size="icon">
-              <LinkedInLogoIcon className="h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="icon">
-              <InstagramLogoIcon className="h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="icon">
-              <TwitterLogoIcon className="h-5 w-5" />
+          <p className="text-xs font-medium mb-4 uppercase text-foreground">Address</p>
+          <p>
+            33 Cork Street,
+            <br />
+            London, England, W1S 3NQ
+          </p>
+          <p className="pt-2">
+            One Monte Carlo,
+            <br />
+            Plaçe du Casino, 98000 Monaco
+          </p>
+        </div>
+
+        {/* Newsletter */}
+        <div>
+          <p className="text-xs font-medium mb-4 uppercase text-foreground">Subscribe to our newsletter</p>
+          <div className="flex w-full max-w-sm items-center gap-2 border-b-1 pb-1">
+            <Input className="focus-visible:ring-[0] pl-0 focus-visible:border-color-foreground border-0 rounded-none shadow-none" type="email" placeholder="Email" value={emailText} onChange={handleEmailTextChange} />
+            <Button type="submit" variant="ghost" disabled={!emailText}>
+              Subscribe
             </Button>
           </div>
-          <p className="text-muted-foreground">
-            hello@colourone.com
-          </p>
         </div>
       </div>
 
       {/* Copyright */}
-      <div className="border-t py-4 text-center text-sm text-muted-foreground">
+      <div className="py-4 text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} Colour One. All rights reserved.
       </div>
     </footer>
-  )
+  );
 }
