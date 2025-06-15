@@ -83,7 +83,7 @@ export const featuredWorks = [
         17th November 2022 - 10th April 2023
       </>
     ),
-    href: "#",
+    href: "/special-projects",
     imageSrc: "/images/image-3.png",
     imageAlt: "Richard Prince",
     imageWidth: 2652,
@@ -94,7 +94,7 @@ export const featuredWorks = [
     title: "Giancarlo Giammetti",
     caption:
       "An interview with the Italian businessman on the power of art to enrich life.",
-    href: "#",
+    href: "/special-projects",
     imageSrc: "/images/image-4.png",
     imageAlt: "Giancarlo Giammetti",
     imageWidth: 2676,
