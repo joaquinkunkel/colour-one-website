@@ -13,12 +13,12 @@ export default function Home() {
         variants={contentParentVariants}
         className="container mx-auto px-6 py-10 md:py-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 row-start-2 items-center"
       >
-        <div className="flex flex-col gap-6 leading-[2] sticky bottom-[20vh] text-lg lg:text-xl">
+        <div className="flex flex-col gap-6 leading-[2] sticky bottom-[20vh] text-lg lg:text-xl font-light">
           <motion.div
             variants={contentVariants}
           >
-            <p >
-              <strong>Colour One</strong> is an independent art advisory with
+            <p>
+              <strong className="font-bold">Colour One</strong> is an independent art advisory with
               more than a decade of experience advising our clients across
               modern and contemporary art.
             </p>
