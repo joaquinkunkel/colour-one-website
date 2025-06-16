@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,7 +14,19 @@ import {
 } from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
-import { menuButtonVariants, collapseButtonVariants, expandedMenuVariants, navItemVariants, colourOneButtonVariants, searchButtonVariants, mobileNavWrapperVariants, mobileMenuButtonVariants, mobileCollapseButtonVariants, mobileExpandedMenuVariants, mobileNavItemVariants } from "@/app/utils/motionVariants";
+import {
+  menuButtonVariants,
+  collapseButtonVariants,
+  expandedMenuVariants,
+  navItemVariants,
+  colourOneButtonVariants,
+  searchButtonVariants,
+  mobileNavWrapperVariants,
+  mobileMenuButtonVariants,
+  mobileCollapseButtonVariants,
+  mobileExpandedMenuVariants,
+  mobileNavItemVariants,
+} from "@/app/utils/motionVariants";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -27,43 +39,63 @@ const navItems = [
 export function Navigation() {
   const pathname = usePathname();
   const [isMenuExpanded, setIsMenuExpanded] = useState(false);
+  const desktopMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const expandMenu = useCallback(() => {
     setIsMenuExpanded(true);
   }, []);
 
-  const collapseMenu = useCallback((event: React.MouseEvent, duration ?: number) => {
-    if (!duration) {
-      setIsMenuExpanded(false);
-    } else {
-      setTimeout(() => {
+  const collapseMenu = useCallback(
+    (event: React.MouseEvent, duration?: number) => {
+      if (!duration) {
         setIsMenuExpanded(false);
-      }, duration)
+      } else {
+        setTimeout(() => {
+          setIsMenuExpanded(false);
+        }, duration);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuExpanded &&
+        desktopMenuRef.current &&
+        !desktopMenuRef.current.contains(event.target as Node) &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuExpanded(false);
+      }
+    };
+
+    if (isMenuExpanded) {
+      // Use capture phase to ensure we get the event before other handlers
+      document.addEventListener("mousedown", handleClickOutside, true);
     }
-  }, []);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside, true);
+    };
+  }, [isMenuExpanded]);
 
   const handleMobileBackgroundClick = useCallback(() => {
     if (isMenuExpanded) {
       setTimeout(() => {
         setIsMenuExpanded(false);
-      }, 20)
+      }, 20);
     }
   }, [isMenuExpanded]);
 
   return (
-    <NavigationMenu viewport={false} className="min-w-full">
-      {/* Backdrop overlay for outside click */}
-      <AnimatePresence>
-        {isMenuExpanded && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-transparent"
-            onClick={collapseMenu}
-          />
-        )}
-      </AnimatePresence>
+    <NavigationMenu
+      ref={desktopMenuRef}
+      viewport={false}
+      className="min-w-full"
+    >
       <div className="container py-4 hidden sm:flex justify-between overflow-x-hidden">
         <NavigationMenuList>
           <motion.div
@@ -78,7 +110,12 @@ export function Navigation() {
                   className={navigationMenuTriggerStyle}
                   onClick={expandMenu}
                 >
-                  <Button variant="ghost" className="transition-all hover:bg-transparent cursor-pointer">Menu</Button>
+                  <Button
+                    variant="ghost"
+                    className="transition-all hover:bg-transparent cursor-pointer"
+                  >
+                    Menu
+                  </Button>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </AnimatePresence>
@@ -98,7 +135,12 @@ export function Navigation() {
                   className={navigationMenuMutedTriggerStyle}
                   onClick={collapseMenu}
                 >
-                  <Button variant="ghost" className="transition-all hover:bg-transparent cursor-pointer">Close</Button>
+                  <Button
+                    variant="ghost"
+                    className="transition-all hover:bg-transparent cursor-pointer"
+                  >
+                    Close
+                  </Button>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </motion.div>
@@ -123,7 +165,13 @@ export function Navigation() {
                       active={pathname === navItem.href}
                     >
                       <Link href={navItem.href} className="text-lg">
-                        <span  className={`transition-all duration-150 ease-in-out ${pathname === navItem.href ? 'font-bold' : 'font-light'}`}>
+                        <span
+                          className={`transition-all duration-150 ease-in-out ${
+                            pathname === navItem.href
+                              ? "font-bold"
+                              : "font-light"
+                          }`}
+                        >
                           {navItem.label}
                         </span>
                       </Link>
@@ -145,7 +193,9 @@ export function Navigation() {
                 asChild
                 className={navigationMenuTriggerStyle}
               >
-                <Link href="/"  className="text-lg">Colour One</Link>
+                <Link href="/" className="text-lg">
+                  Colour One
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </motion.div>
@@ -161,7 +211,9 @@ export function Navigation() {
                 asChild
                 className={navigationMenuTriggerStyle}
               >
-                <Link href="#" className="text-lg">Search</Link>
+                <Link href="#" className="text-lg">
+                  Search
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </motion.div>
@@ -170,6 +222,7 @@ export function Navigation() {
 
       {/* Mobile nav menu */}
       <motion.div
+        ref={mobileMenuRef}
         className="backdrop-blur-xl sm:hidden container bg-background absolute top-0 z-1000 py-4 flex justify-between overflow-hidden h-[100vh]"
         initial="collapsed"
         variants={mobileNavWrapperVariants}
@@ -189,7 +242,12 @@ export function Navigation() {
                   className={navigationMenuTriggerStyle}
                   onClick={expandMenu}
                 >
-                  <Button variant="ghost" className="transition-all hover:bg-transparent cursor-pointer">Menu</Button>
+                  <Button
+                    variant="ghost"
+                    className="transition-all hover:bg-transparent cursor-pointer"
+                  >
+                    Menu
+                  </Button>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </AnimatePresence>
@@ -209,7 +267,12 @@ export function Navigation() {
                   className={navigationMenuTriggerStyle}
                   onClick={collapseMenu}
                 >
-                  <Button variant="ghost" className="transition-all hover:bg-transparent cursor-pointer">Close</Button>
+                  <Button
+                    variant="ghost"
+                    className="transition-all hover:bg-transparent cursor-pointer"
+                  >
+                    Close
+                  </Button>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </motion.div>
@@ -220,7 +283,6 @@ export function Navigation() {
               animate={isMenuExpanded ? "visible" : "hidden"}
               variants={mobileExpandedMenuVariants}
               className="flex flex-col gap-4 pt-4"
-
             >
               {navItems.map((navItem, index) => (
                 <motion.div
@@ -236,7 +298,13 @@ export function Navigation() {
                       onClick={(e) => collapseMenu(e, 150)}
                     >
                       <Link className="text-xl" href={navItem.href}>
-                        <span  className={`transition-all duration-150 ease-in-out ${pathname === navItem.href ? 'font-bold' : 'font-light'}`}>
+                        <span
+                          className={`transition-all duration-150 ease-in-out ${
+                            pathname === navItem.href
+                              ? "font-bold"
+                              : "font-light"
+                          }`}
+                        >
                           {navItem.label}
                         </span>
                       </Link>
