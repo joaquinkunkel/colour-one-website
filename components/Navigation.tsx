@@ -42,7 +42,7 @@ export function Navigation() {
     }
   }, []);
 
-  const handleMobileBackgroundClick = useCallback((event: React.MouseEvent) => {
+  const handleMobileBackgroundClick = useCallback(() => {
     if (isMenuExpanded) {
       setTimeout(() => {
         setIsMenuExpanded(false);
