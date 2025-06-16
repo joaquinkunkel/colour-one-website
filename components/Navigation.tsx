@@ -39,7 +39,7 @@ const navItems = [
 export function Navigation() {
   const pathname = usePathname();
   const [isDesktopMenuExpanded, setIsDesktopMenuExpanded] = useState(false);
-    const [isMobileMenuExpanded, setIsMobileMenuExpanded] = useState(false);
+  const [isMobileMenuExpanded, setIsMobileMenuExpanded] = useState(false);
 
   const desktopMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ export function Navigation() {
     setIsDesktopMenuExpanded(true);
   }, []);
 
-    const expandMobileMenu = useCallback(() => {
+  const expandMobileMenu = useCallback(() => {
     setIsMobileMenuExpanded(true);
   }, []);
 
@@ -78,34 +78,21 @@ export function Navigation() {
 
     if (isDesktopMenuExpanded) {
       // Use capture phase to ensure we get the event before other handlers
-      document.addEventListener("mousedown", handleClickOutsideDesktopMenu, true);
+      document.addEventListener(
+        "mousedown",
+        handleClickOutsideDesktopMenu,
+        true
+      );
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutsideDesktopMenu, true);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutsideDesktopMenu,
+        true
+      );
     };
   }, [isDesktopMenuExpanded]);
-
-    useEffect(() => {
-    const handleClickOutsideMobileMenu = (event: MouseEvent) => {
-      if (
-        isMobileMenuExpanded &&
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target as Node)
-      ) {
-        setIsMobileMenuExpanded(false);
-      }
-    };
-
-    if (isMobileMenuExpanded) {
-      // Use capture phase to ensure we get the event before other handlers
-      document.addEventListener("mousedown", handleClickOutsideMobileMenu, true);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutsideMobileMenu, true);
-    };
-  }, [isMobileMenuExpanded]);
 
   const handleMobileBackgroundClick = useCallback(() => {
     if (isMobileMenuExpanded) {
