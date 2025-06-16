@@ -88,8 +88,8 @@ export default function Home() {
             className="font-light text-base"
             variants={contentVariants}
           >
-            <div className="container mx-auto pb-6 flex flex-row gap-8">
-              <div className="flex items-center gap-2">
+            <div className="container mx-auto pb-6 flex flex-col md:flex-row gap-2 md:gap-8">
+              <div className="flex items-center gap-2 mr-auto">
                 <Mail className="w-4 h-4" />
                 <Link
                   href="mailto:info@colourone.com"
