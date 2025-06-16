@@ -25,7 +25,7 @@ export default function Home() {
             alt={"Services photo"}
           />
         </motion.div>
-        <div className="flex flex-col leading-[2] sticky bottom-[20vh] lg:text-xl container max-w-lg mx-auto px-6 text-center flex flex-col gap-2">
+        <div className="flex flex-col leading-[2] lg:text-xl container max-w-lg mx-auto px-6 text-center flex flex-col gap-2">
           <motion.h2
             className="font-light text-[40px] leading-tight"
             variants={contentVariants}
