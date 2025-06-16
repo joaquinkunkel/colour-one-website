@@ -38,21 +38,27 @@ const navItems = [
 
 export function Navigation() {
   const pathname = usePathname();
-  const [isMenuExpanded, setIsMenuExpanded] = useState(false);
+  const [isDesktopMenuExpanded, setIsDesktopMenuExpanded] = useState(false);
+    const [isMobileMenuExpanded, setIsMobileMenuExpanded] = useState(false);
+
   const desktopMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const expandMenu = useCallback(() => {
-    setIsMenuExpanded(true);
+  const expandDesktopMenu = useCallback(() => {
+    setIsDesktopMenuExpanded(true);
   }, []);
 
-  const collapseMenu = useCallback(
+    const expandMobileMenu = useCallback(() => {
+    setIsMobileMenuExpanded(true);
+  }, []);
+
+  const collapseDesktopMenu = useCallback(
     (event: React.MouseEvent, duration?: number) => {
       if (!duration) {
-        setIsMenuExpanded(false);
+        setIsDesktopMenuExpanded(false);
       } else {
         setTimeout(() => {
-          setIsMenuExpanded(false);
+          setIsDesktopMenuExpanded(false);
         }, duration);
       }
     },
@@ -60,35 +66,54 @@ export function Navigation() {
   );
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutsideDesktopMenu = (event: MouseEvent) => {
       if (
-        isMenuExpanded &&
+        isDesktopMenuExpanded &&
         desktopMenuRef.current &&
-        !desktopMenuRef.current.contains(event.target as Node) &&
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target as Node)
+        !desktopMenuRef.current.contains(event.target as Node)
       ) {
-        setIsMenuExpanded(false);
+        setIsDesktopMenuExpanded(false);
       }
     };
 
-    if (isMenuExpanded) {
+    if (isDesktopMenuExpanded) {
       // Use capture phase to ensure we get the event before other handlers
-      document.addEventListener("mousedown", handleClickOutside, true);
+      document.addEventListener("mousedown", handleClickOutsideDesktopMenu, true);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside, true);
+      document.removeEventListener("mousedown", handleClickOutsideDesktopMenu, true);
     };
-  }, [isMenuExpanded]);
+  }, [isDesktopMenuExpanded]);
+
+    useEffect(() => {
+    const handleClickOutsideMobileMenu = (event: MouseEvent) => {
+      if (
+        isMobileMenuExpanded &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuExpanded(false);
+      }
+    };
+
+    if (isMobileMenuExpanded) {
+      // Use capture phase to ensure we get the event before other handlers
+      document.addEventListener("mousedown", handleClickOutsideMobileMenu, true);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideMobileMenu, true);
+    };
+  }, [isMobileMenuExpanded]);
 
   const handleMobileBackgroundClick = useCallback(() => {
-    if (isMenuExpanded) {
+    if (isMobileMenuExpanded) {
       setTimeout(() => {
-        setIsMenuExpanded(false);
+        setIsMobileMenuExpanded(false);
       }, 20);
     }
-  }, [isMenuExpanded]);
+  }, [isMobileMenuExpanded]);
 
   return (
     <NavigationMenu
@@ -101,14 +126,14 @@ export function Navigation() {
           <motion.div
             variants={menuButtonVariants}
             initial="collapsed"
-            animate={isMenuExpanded ? "expanded" : "collapsed"}
+            animate={isDesktopMenuExpanded ? "expanded" : "collapsed"}
           >
             <AnimatePresence mode="wait">
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
                   className={navigationMenuTriggerStyle}
-                  onClick={expandMenu}
+                  onClick={expandDesktopMenu}
                 >
                   <Button
                     variant="ghost"
@@ -126,14 +151,14 @@ export function Navigation() {
               key="collapse-button"
               variants={collapseButtonVariants}
               initial="collapsed"
-              animate={isMenuExpanded ? "expanded" : "collapsed"}
+              animate={isDesktopMenuExpanded ? "expanded" : "collapsed"}
               exit="collapsed"
             >
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
                   className={navigationMenuMutedTriggerStyle}
-                  onClick={collapseMenu}
+                  onClick={collapseDesktopMenu}
                 >
                   <Button
                     variant="ghost"
@@ -149,7 +174,7 @@ export function Navigation() {
             <motion.div
               className="flex w-0"
               initial="hidden"
-              animate={isMenuExpanded ? "visible" : "hidden"}
+              animate={isDesktopMenuExpanded ? "visible" : "hidden"}
               variants={expandedMenuVariants}
             >
               {navItems.map((navItem, index) => (
@@ -186,7 +211,7 @@ export function Navigation() {
           <motion.div
             variants={colourOneButtonVariants}
             initial="visible"
-            animate={isMenuExpanded ? "hidden" : "visible"}
+            animate={isDesktopMenuExpanded ? "hidden" : "visible"}
           >
             <NavigationMenuItem>
               <NavigationMenuLink
@@ -204,7 +229,7 @@ export function Navigation() {
           <motion.div
             variants={searchButtonVariants}
             initial="visible"
-            animate={isMenuExpanded ? "hidden" : "visible"}
+            animate={isDesktopMenuExpanded ? "hidden" : "visible"}
           >
             <NavigationMenuItem>
               <NavigationMenuLink
@@ -226,21 +251,21 @@ export function Navigation() {
         className="backdrop-blur-xl sm:hidden container bg-background absolute top-0 z-1000 py-4 flex justify-between overflow-hidden h-[100vh]"
         initial="collapsed"
         variants={mobileNavWrapperVariants}
-        animate={isMenuExpanded ? "expanded" : "collapsed"}
+        animate={isMobileMenuExpanded ? "expanded" : "collapsed"}
         onClick={handleMobileBackgroundClick}
       >
         <NavigationMenuList>
           <motion.div
             variants={mobileMenuButtonVariants}
             initial="collapsed"
-            animate={isMenuExpanded ? "expanded" : "collapsed"}
+            animate={isMobileMenuExpanded ? "expanded" : "collapsed"}
           >
             <AnimatePresence mode="wait">
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
                   className={navigationMenuTriggerStyle}
-                  onClick={expandMenu}
+                  onClick={expandMobileMenu}
                 >
                   <Button
                     variant="ghost"
@@ -258,14 +283,14 @@ export function Navigation() {
               key="collapse-button"
               variants={mobileCollapseButtonVariants}
               initial="collapsed"
-              animate={isMenuExpanded ? "expanded" : "collapsed"}
+              animate={isMobileMenuExpanded ? "expanded" : "collapsed"}
               exit="collapsed"
             >
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
                   className={navigationMenuTriggerStyle}
-                  onClick={collapseMenu}
+                  onClick={collapseDesktopMenu}
                 >
                   <Button
                     variant="ghost"
@@ -280,7 +305,7 @@ export function Navigation() {
             {/* Parent of expanded menu items */}
             <motion.div
               initial="hidden"
-              animate={isMenuExpanded ? "visible" : "hidden"}
+              animate={isMobileMenuExpanded ? "visible" : "hidden"}
               variants={mobileExpandedMenuVariants}
               className="flex flex-col gap-4 pt-4"
             >
@@ -295,7 +320,7 @@ export function Navigation() {
                       asChild
                       className={`${navigationMenuTriggerStyle} bg-none`}
                       active={pathname === navItem.href}
-                      onClick={(e) => collapseMenu(e, 150)}
+                      onClick={(e) => collapseDesktopMenu(e, 150)}
                     >
                       <Link className="text-xl" href={navItem.href}>
                         <span
@@ -319,7 +344,7 @@ export function Navigation() {
           <motion.div
             variants={colourOneButtonVariants}
             initial="visible"
-            animate={isMenuExpanded ? "hidden" : "visible"}
+            animate={isMobileMenuExpanded ? "hidden" : "visible"}
           >
             <NavigationMenuItem>
               <NavigationMenuLink
@@ -335,13 +360,13 @@ export function Navigation() {
           <motion.div
             variants={searchButtonVariants}
             initial="visible"
-            animate={isMenuExpanded ? "hidden" : "visible"}
+            animate={isMobileMenuExpanded ? "hidden" : "visible"}
           >
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
                 className={navigationMenuTriggerStyle}
-                onClick={expandMenu}
+                onClick={expandMobileMenu}
               >
                 <Link href="#">Search</Link>
               </NavigationMenuLink>
