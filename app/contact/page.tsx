@@ -73,9 +73,9 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         variants={contentParentVariants}
-        className="container mx-auto px-6 py-10 md:py-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 row-start-2 items-start"
+        className="container mx-auto px-6 py-10 md:py-8 grid grid-cols-1 xl:items-center lg:grid-cols-5 gap-12 md:gap-20 row-start-2 items-start"
       >
-        <motion.div variants={contentVariants}>
+        <motion.div className="col-span-5 lg:col-span-2 xl:col-span-3" variants={contentVariants}>
           <Image
             src="/images/image-2.png"
             width={3552}
@@ -83,7 +83,7 @@ export default function Home() {
             alt={"Contact photo"}
           />
         </motion.div>
-        <div className="flex flex-col leading-[2] lg:text-xl container mx-auto flex flex-col gap-2">
+        <div className="flex flex-col col-span-5 lg:col-span-3 xl:col-span-2 leading-[2] lg:text-xl container mx-auto flex flex-col gap-2">
           <motion.div
             className="font-light text-base"
             variants={contentVariants}
