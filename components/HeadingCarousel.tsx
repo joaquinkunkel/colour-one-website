@@ -27,24 +27,24 @@ export function HeadingCarousel() {
 
   const images = [
     {
-      src: "/images/image-1.png",
-      alt: "Office gallery space",
+      src: "/images/office01.png",
+      alt: "Colour One office space",
     },
     {
-      src: "/images/image-2.png",
-      alt: "Office interior",
+      src: "/images/office02.png",
+      alt: "Art advisory office interior",
     },
     {
-      src: "/images/image-3.png",
+      src: "/images/office03.png",
       alt: "Gallery workspace",
     },
     {
-      src: "/images/image-4.png",
-      alt: "Art advisory office",
+      src: "/images/office04.png",
+      alt: "Contemporary art office",
     },
     {
-      src: "/images/image-5.png",
-      alt: "Contemporary art space",
+      src: "/images/office05.png",
+      alt: "Professional art advisory environment",
     },
   ];
 
