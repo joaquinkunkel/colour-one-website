@@ -5,7 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { featuredWorks, teamMembers } from "./data/homepage.js";
 import { motion } from "framer-motion";
-import { contentParentVariants, viewportOnce, contentVariants, teamListVariants } from "./utils/motionVariants";
+import {
+  contentParentVariants,
+  viewportOnce,
+  contentVariants,
+  teamListVariants,
+} from "./utils/motionVariants";
 
 export default function Home() {
   return (
@@ -29,7 +34,7 @@ export default function Home() {
             className="container w-full mx-auto overflow-x-hidden"
           >
             <div className="container mx-auto px-6">
-              <h3 className="font-light text-center text-[40px] leading-tight max-w-[1000px] mx-auto">
+              <h3 className="font-light text-center text-lg md:text-xl leading-tight max-w-[800px] mx-auto">
                 Colour One is an independent art advisory with more than a
                 decade of experience advising our clients across modern and
                 contemporary art.
@@ -41,6 +46,11 @@ export default function Home() {
         {featuredWorks.map((featuredWork, index) => (
           <motion.div
             key={index}
+            id={
+              featuredWork.eyebrowText === "Special Projects"
+                ? "richard-prince-exhibition"
+                : "giancarlo-giammetti-interview"
+            }
             initial="hidden"
             whileInView="visible"
             variants={contentParentVariants}
@@ -93,7 +103,10 @@ export default function Home() {
           </motion.div>
         ))}
 
-        <div className="container py-8 mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-20 md:items-start xl:items-center">
+        <div
+          id="team-section"
+          className="container py-8 mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-20 md:items-start xl:items-center"
+        >
           <div className="col-span-3 lg:col-span-2 md:sticky top-20">
             <Image
               className="w-full"
@@ -119,8 +132,8 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 grid-flow-row lg:max-h-240 gap-4">
               {teamMembers.map((member, index) => (
                 <motion.div key={index} variants={teamListVariants}>
-                  <p className="text-xl font-light">{member.name}</p>
-                  <p className="text-s font-light">{member.role}</p>
+                  <p className="text-lg font-light">{member.name}</p>
+                  <p className="text-xs font-light">{member.role}</p>
                 </motion.div>
               ))}
             </div>

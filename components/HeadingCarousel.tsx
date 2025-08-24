@@ -3,7 +3,6 @@
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -15,42 +14,65 @@ import Image from "next/image";
 
 export function HeadingCarousel() {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: false })
+    Autoplay({
+      delay: 4000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: false,
+      stopOnFocusIn: true,
+    })
   );
 
+  // Aspect ratio: 3552:2400 = 1.48:1 (landscape)
+  const aspectRatio = 3552 / 2400;
+
   const images = [
-    <Image
-      key={1}
-      src="/images/image-1.png"
-      width={3552}
-      height={2400}
-      alt={"Cover photo"}
-    />,
-    <Image
-      key={2}
-      src="/images/image-2.png"
-      width={3552}
-      height={2400}
-      alt={"Cover photo 2"}
-    />,
+    {
+      src: "/images/image-1.png",
+      alt: "Office gallery space",
+    },
+    {
+      src: "/images/image-2.png",
+      alt: "Office interior",
+    },
+    {
+      src: "/images/image-3.png",
+      alt: "Gallery workspace",
+    },
+    {
+      src: "/images/image-4.png",
+      alt: "Art advisory office",
+    },
+    {
+      src: "/images/image-5.png",
+      alt: "Contemporary art space",
+    },
   ];
 
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full px-3 mx-auto"
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
+      className="w-full"
+      opts={{
+        loop: true,
+        align: "start",
+      }}
     >
       <CarouselContent className="">
-        {Array.from({ length: 2 }).map((_, index) => (
+        {images.map((image, index) => (
           <CarouselItem key={index}>
-            <div className="">
-              <Card className="p-0 rounded-none">
-                <CardContent className="p-0 rounded-none">
-                  {images[index]}
-                </CardContent>
-              </Card>
+            <div
+              className="relative w-full overflow-hidden"
+              style={{
+                aspectRatio: aspectRatio,
+              }}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              />
             </div>
           </CarouselItem>
         ))}

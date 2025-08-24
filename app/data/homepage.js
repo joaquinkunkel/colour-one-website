@@ -71,6 +71,7 @@ export const teamMembers = [
 
 export const featuredWorks = [
   {
+    eyebrowText: "Special Projects",
     title: (
       <>
         Richard Prince: <span className="whitespace-nowrap">Same Man</span>

@@ -25,7 +25,10 @@ export default function Home() {
             alt={"Services photo"}
           />
         </motion.div>
-        <div className="flex flex-col leading-[2] lg:text-xl container max-w-lg mx-auto px-6 text-center flex flex-col gap-2">
+        <div
+          id="giancarlo-article"
+          className="flex flex-col leading-[2] lg:text-xl container max-w-lg mx-auto px-6 text-center flex flex-col gap-2"
+        >
           <motion.h2
             className="font-light text-[40px] leading-tight"
             variants={contentVariants}
@@ -53,6 +56,7 @@ export default function Home() {
         className="container px-6 mx-auto py-8 flex flex-col md:flex-row gap-12"
       >
         <motion.div
+          id="basquiat-article"
           variants={contentVariants}
           className="flex flex-col gap-6 text-center"
         >
@@ -79,6 +83,7 @@ export default function Home() {
           </div>
         </motion.div>
         <motion.div
+          id="george-condo-article"
           variants={contentVariants}
           className="flex flex-col gap-6 text-center"
         >
@@ -105,6 +110,7 @@ export default function Home() {
           </div>
         </motion.div>
         <motion.div
+          id="andy-warhol-article"
           variants={contentVariants}
           className="flex flex-col gap-6 text-center"
         >

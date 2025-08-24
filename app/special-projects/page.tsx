@@ -20,6 +20,7 @@ export default function Home() {
           viewport={viewportOnce}
         >
           <motion.div
+            id="richard-prince-exhibition"
             variants={contentVariants}
             className="container w-full mx-auto overflow-x-hidden"
           >
@@ -32,6 +33,7 @@ export default function Home() {
             />
           </motion.div>
           <motion.div
+            id="richard-prince-details"
             variants={contentVariants}
             className="container w-full mx-auto overflow-x-hidden"
           >
@@ -55,6 +57,7 @@ export default function Home() {
           className="container px-6 mx-auto text-lg flex flex-col-reverse md:grid md:grid-cols-5 gap-8 md:gap-12"
         >
           <motion.div
+            id="richard-prince-content"
             variants={contentVariants}
             className="col-span-4 md:col-span-2 leading-[1.8] font-light flex flex-col gap-8"
           >
