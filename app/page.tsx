@@ -15,9 +15,9 @@ import {
 export default function Home() {
   return (
     <div className="font-[family-name:var(--font-folio)]">
-      <main className="flex flex-col gap-[64px] row-start-2 items-center sm:items-start">
+      <main className="flex flex-col gap-8 md:gap-[64px] row-start-2 items-center sm:items-start">
         <motion.div
-          className="w-full flex flex-col gap-[64px] row-start-2 items-center sm:items-start"
+          className="w-full flex flex-col gap-8 md:gap-[64px] row-start-2 items-center sm:items-start"
           variants={contentParentVariants}
           initial="hidden"
           whileInView="visible"

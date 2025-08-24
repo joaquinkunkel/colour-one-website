@@ -173,7 +173,7 @@ export function Navigation() {
         <Button
           variant="ghost"
           onClick={expandMenu}
-          className="transition-all hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
+          className="transition-all font-light hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
         >
           Menu
         </Button>
@@ -182,7 +182,7 @@ export function Navigation() {
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link
             href="/"
-            className="text-md font-medium hover:text-muted-foreground transition-colors uppercase"
+            className="text-sm font-light hover:text-muted-foreground transition-colors uppercase"
           >
             Colour One
           </Link>
@@ -193,7 +193,7 @@ export function Navigation() {
           <Button
             variant="ghost"
             onClick={expandSearch}
-            className="transition-all hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
+            className="transition-all font-light hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
           >
             Search
           </Button>
@@ -213,7 +213,7 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   onClick={collapseMenu}
-                  className="transition-all hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
+                  className="transition-all font-light hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
                 >
                   Close
                 </Button>
@@ -250,7 +250,7 @@ export function Navigation() {
                 <div className="flex-1 flex justify-end">
                   <Button
                     variant="ghost"
-                    className="transition-all hover:bg-transparent cursor-pointer uppercase invisible rounded-none"
+                    className="transition-all font-light hover:bg-transparent cursor-pointer uppercase invisible rounded-none"
                   >
                     Search
                   </Button>
@@ -316,7 +316,7 @@ export function Navigation() {
         <Button
           variant="ghost"
           onClick={expandMenu}
-          className="transition-all hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
+          className="transition-all font-light hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
         >
           Menu
         </Button>
@@ -325,7 +325,7 @@ export function Navigation() {
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link
             href="/"
-            className="text-md font-medium hover:text-muted-foreground transition-colors uppercase"
+            className="text-sm font-light hover:text-muted-foreground transition-colors uppercase"
           >
             Colour One
           </Link>
@@ -336,7 +336,7 @@ export function Navigation() {
           <Button
             variant="ghost"
             onClick={expandSearch}
-            className="transition-all hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
+            className="transition-all font-light hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
           >
             Search
           </Button>
@@ -357,7 +357,7 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   onClick={collapseMenu}
-                  className="absolute left-6 top-4 transition-all hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
+                  className="font-light absolute left-6 top-4 transition-all hover:bg-transparent cursor-pointer uppercase rounded-none z-10"
                 >
                   Close
                 </Button>

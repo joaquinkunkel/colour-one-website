@@ -15,7 +15,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         variants={contentParentVariants}
-        className="container mx-auto px-6 py-10 md:py-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 row-start-2 items-center"
+        className="container mx-auto px-6 py-6 md:py-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 row-start-2 items-center"
       >
         <motion.div variants={contentVariants}>
           <Image

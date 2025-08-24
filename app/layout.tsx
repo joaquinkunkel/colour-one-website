@@ -34,7 +34,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Colour One",
-  description: "Colour One is an independent art advisory with more than a decade of experience advising our clients across modern and contemporary art.",
+  description:
+    "Colour One is an independent art advisory with more than a decade of experience advising our clients across modern and contemporary art.",
 };
 
 export default function RootLayout({
@@ -56,9 +57,7 @@ export default function RootLayout({
           <nav className="bg-background z-100 mx-auto sticky top-0">
             <Navigation />
           </nav>
-          <div className="pb-[24] pt-[80] sm:pt-[0]">
-            {children}
-          </div>
+          <div className="pb-[24] pt-[16] sm:pt-[0]">{children}</div>
           <SiteFooter />
         </ThemeProvider>
       </body>
